@@ -4,9 +4,9 @@ exports.createRecipe= async (req,res)=>
 {
     try{
 
-        const {title, ingredients,steps,cookingTime,servings,photo,video} = req.body;
+        const {title, ingredients,steps,cookingTime,servings,photo,video, cuisine, diet} = req.body;
 
-        const newRecipe = new Recipe({ title,ingredients,steps,cookingTime,servings,photo,video,createdBy:req.user._id});
+        const newRecipe = new Recipe({ title,ingredients,steps,cookingTime,servings,photo,video, cuisine, diet,createdBy:req.user._id});
 
         const savedRecipe = await newRecipe.save();
 
