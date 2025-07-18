@@ -45,8 +45,22 @@ exports.updateMealPlan = async (req, res) => {
 
 exports.deleteMealPlan = async (req, res) => {
   try {
-    await MealPlan.findByIdAndDelete(req.params.id);
-    res.json({ msg: "Meal plan deleted" });
+    const { date } = req.body;
+
+    if (!date) {
+      return res.status(400).json({ msg: "Date is required" });
+    }
+
+    const deleted = await MealPlan.findOneAndDelete({
+      user: req.user._id,
+      date: new Date(date),
+    });
+
+    if (!deleted) {
+      return res.status(404).json({ msg: "Meal plan not found" });
+    }
+
+    res.json({ msg: "Meal plan deleted successfully" });
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
