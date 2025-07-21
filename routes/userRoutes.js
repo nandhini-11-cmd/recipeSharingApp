@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const {registerUser,loginUser,updateUserProfile } = require('../controllers/authController');
-const {addToFavorites, getFavoriteRecipes,followUser,unfollowUser} = require("../controllers/userController");
+const {addToFavorites, getFavoriteRecipes,followUser,unfollowUser,getFollowingUsers} = require("../controllers/userController");
 
 const protect = require('../middleware/authMiddleware');
 
