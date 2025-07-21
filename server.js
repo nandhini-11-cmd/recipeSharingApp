@@ -18,7 +18,10 @@ const mealPlanRoutes = require("./routes/mealPlanRoutes");
 
 
 
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  credentials: true,
+}));
 
 app.use(express.json());
 

@@ -84,3 +84,12 @@ exports.unfollowUser = async (req, res) => {
 } catch (err) {
   res.status(500).json({ msg: err.message });
 }};
+
+exports.getFollowingUsers = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).populate("following", "name email profilePic bio");
+    res.json(user.following);
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+};
