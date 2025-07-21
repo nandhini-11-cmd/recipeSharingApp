@@ -7,8 +7,6 @@ const {addToFavorites, getFavoriteRecipes,followUser,unfollowUser,getFollowingUs
 
 const protect = require('../middleware/authMiddleware');
 
-
-
 router.post('/register', registerUser);
 
 router.post('/login', loginUser);
