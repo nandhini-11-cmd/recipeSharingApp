@@ -26,8 +26,4 @@ router.post("/follow/:userId", protect, followUser);
 router.post("/unfollow/:userId", protect, unfollowUser);
 
 router.get("/following", protect, getFollowingUsers);
-
-
-
-
 module.exports = router;
