@@ -41,17 +41,17 @@ exports.followUser = async (req, res) => {
     if (userToFollow._id.equals(currentUser._id))
       return res.status(400).json({ msg: "You can't follow yourself" });
 
-    if (!currentUser.following.includes(userToFollow._id)) {
-      currentUser.following.push(userToFollow._id);
-      userToFollow.followers.push(currentUser._id);
+    if (!currentUser.following.some(id => id.equals(userToFollow._id))) {
+  currentUser.following.push(userToFollow._id);
+  userToFollow.followers.push(currentUser._id);
 
-      await currentUser.save();
-      await userToFollow.save();
+  await currentUser.save();
+  await userToFollow.save();
 
-      return res.json({ msg: "Followed user successfully" });
-    }
+  return res.json({ msg: "Followed user successfully" });
+}
 
-    res.status(400).json({ msg: "Already following this user" });
+res.status(400).json({ msg: "Already following this user" });
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
