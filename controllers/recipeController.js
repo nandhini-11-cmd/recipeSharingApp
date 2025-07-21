@@ -60,7 +60,7 @@ exports.getSingleRecipe = async (req,res) =>
 {
     try{
 
-        const recipe = await Recipe.findById(req.params.id).populate("createdBy","name email").populate("comments.user", "name email").populate("ratings.user","name email");
+        const recipe = await Recipe.findById(req.params.id).populate("createdBy", "_id name email").populate("comments.user", "name email").populate("ratings.user","name email");
 
         if (!recipe) {
       return res.status(404).json({ msg: "Recipe not found" });
