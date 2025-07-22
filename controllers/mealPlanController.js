@@ -30,18 +30,22 @@ exports.getMealPlans = async (req, res) => {
 exports.updateMealPlan = async (req, res) => {
   try {
     const { date, recipes } = req.body;
+    
+    const normalizedDate = new Date(new Date(date).setHours(0, 0, 0, 0));
 
-    const plan = await MealPlan.findOneAndUpdate(
-      { user: req.user._id, date },
-      { recipes },
-      { new: true }
-    );
+    const plan = await MealPlan.findOneAndUpdate({ user: req.user._id, date: normalizedDate },
+      { recipes },{ new: true });
+
+    if (!plan) {
+      return res.status(404).json({ msg: "Meal plan not found for the date" });
+    }
 
     res.json(plan);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
 };
+
 
 exports.deleteMealPlan = async (req, res) => {
   try {
