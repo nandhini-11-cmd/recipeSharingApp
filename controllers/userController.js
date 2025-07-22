@@ -3,7 +3,7 @@ const Recipe = require("../models/Recipe");
 
 exports.addToFavorites = async (req, res) => {
   try {
-    const recipeId = req.params.recipeId;
+    const recipeId = req.params.id;
 
     const user = await User.findById(req.user._id);
 
@@ -19,6 +19,8 @@ exports.addToFavorites = async (req, res) => {
     res.status(500).json({ msg: err.message });
   }
 };
+
+
 
 exports.getFavoriteRecipes = async (req, res) => {
   try {

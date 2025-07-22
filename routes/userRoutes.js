@@ -17,8 +17,8 @@ router.get("/profile", protect, (req, res) => {
 
 router.put("/profile", protect, updateUserProfile);
 
-router.post("/favorites/:recipeId", protect, addToFavorites);
-router.get("/favorites", protect, getFavoriteRecipes);
+router.post("/:id/favorite", protect, addToFavorites);
+router.get("/favorite", protect, getFavoriteRecipes);
 
 router.post("/follow/:userId", protect, followUser);
 router.post("/unfollow/:userId", protect, unfollowUser);
